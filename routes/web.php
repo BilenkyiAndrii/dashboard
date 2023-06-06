@@ -61,9 +61,17 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('static-sign-up');
 	})->name('sign-up');
 
+    Route::get('/user-profile', function () {
+        return view('laravel-examples.user-profile');
+    })->name('user-profile');
+
+    Route::get('user-management', [InfoUserController::class, 'index'])->name('user-management');
+    Route::get('user-management/create', [InfoUserController::class, 'create'])->name('user-management.create');
+    Route::post('user-management', [InfoUserController::class, 'store'])->name('user-management.store');
+    Route::put('user-management/{id}', [InfoUserController::class, 'update'])->name('user-management.update');
+    Route::delete('user-management/{user}', [InfoUserController::class, 'destroy'])->name('user-management.destroy');
+
     Route::get('/logout', [SessionsController::class, 'destroy']);
-	Route::get('/user-profile', [InfoUserController::class, 'create']);
-	Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
